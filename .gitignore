@@ -80,7 +80,7 @@ Plugins/*/Intermediate/*
 DerivedDataCache/*
 
 #################
-## FOLDER ignore##
+##FOLDER ignore##
 #################
-*/Concepts GDD
+/Concepts GDD
 
