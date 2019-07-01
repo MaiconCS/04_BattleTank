@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "TankPlayerController.h"
 #include "Public/TankPawn.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
@@ -15,9 +16,12 @@ class BATTLETANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 	
-public:
-	ATankPawn* GetControlledTank();
+private:
 
 	virtual void BeginPlay() override;
-	
+
+	ATankPawn* GetTankPlayer();
+		
+	ATankPawn* GetTankPawn();
+
 };

@@ -1,27 +1,40 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "BattleTank.h"
 #include "TankAIController.h"
+#include "Runtime/Engine/Classes/Engine/World.h"
+#include "BattleTank.h"
+
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto ControlledTank = GetControlledTank();
+	auto TankPlayer = GetTankPlayer();
 
-	if (!ControlledTank) {
+	if (!TankPlayer) {
 
-		UE_LOG(LogTemp, Warning, TEXT("TankAI No Possessed"));
+		UE_LOG(LogTemp, Warning, TEXT("TankAI can't find TankPlayer"));
 
 	}
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("TankAI Possessed %s"), *(ControlledTank->GetName()));
-
+	
+		UE_LOG(LogTemp, Warning, TEXT("TankAI found TankPlayer %s"), *(GetTankPlayer()->GetName()));
+	
 	}
+
+
 	
 }
-ATankPawn* ATankAIController::GetControlledTank() 
+ATankPawn* ATankAIController::GetTankPlayer()
 {
 	return Cast<ATankPawn>(GetPawn());
 
+}
+
+ATankPawn * ATankAIController::GetTankPawn()
+{
+	auto TankPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (!TankPawn) { return nullptr;}
+	
+	return Cast<ATankPawn>(TankPawn);
 }
