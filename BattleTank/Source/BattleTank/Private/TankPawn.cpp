@@ -33,3 +33,8 @@ void ATankPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void ATankPawn::AimAt(FVector HitLocation)
+{	
+	auto OurTankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s Aim at %s"), *OurTankName,*HitLocation.ToString());
+}

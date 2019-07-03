@@ -4,7 +4,6 @@
 #include "Runtime/Engine/Classes/Engine/World.h"
 #include "BattleTank.h"
 
-
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -21,10 +20,26 @@ void ATankAIController::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("TankAI found TankPlayer %s"), *(GetTankPlayer()->GetName()));
 	
 	}
-
-
 	
 }
+
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	
+	if (!GetTankPlayer()) { return; }
+	
+	if (GetTankPlayer()) {
+		//Todo MOVE TOWARDS the player
+
+		//Aim towards the player
+		GetTankPlayer()->AimAt(GetTankPawn()->GetActorLocation());
+		//Fire if ready
+
+	}
+
+}
+
 ATankPawn* ATankAIController::GetTankPlayer()
 {
 	return Cast<ATankPawn>(GetPawn());

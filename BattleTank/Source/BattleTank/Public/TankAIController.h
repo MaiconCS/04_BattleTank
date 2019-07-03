@@ -17,11 +17,13 @@ class BATTLETANK_API ATankAIController : public AAIController
 	GENERATED_BODY()
 	
 private:
-
+	
 	virtual void BeginPlay() override;
 
-	ATankPawn* GetTankPlayer();
-		
-	ATankPawn* GetTankPawn();
+	virtual void Tick(float DeltaTime) override;
+	///tank controlled by player	
+	ATankPawn* GetTankPlayer(); 
+	///this is the tank itself	
+	ATankPawn* GetTankPawn();  
 
 };

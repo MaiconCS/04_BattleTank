@@ -42,8 +42,8 @@ void ATankPlayerController::AimTowardsCrosshair()
 	FVector HitLocation;//out parameter
 	if (GetSightRayHitLocation(HitLocation)) //has "side-effect", is going to line trace.
 	{
-		//TODO tell controlled tank to aim at this point
-		UE_LOG(LogTemp, Warning, TEXT("ScreenLocation: %s"), *HitLocation.ToString());
+		//report tank aim to location.
+		GetControlledTank()->AimAt(HitLocation);
 	}	
 }
 
@@ -70,7 +70,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation)const
 	return true;
 
 }
-//!!!!!!!!!!!!!!const not work with methods GetReachLineStart() & GetReachLineEnd()!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+//!!!!!!!!!!!!!!LineTraceSingleByChannel()!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
 
 bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const
 {
