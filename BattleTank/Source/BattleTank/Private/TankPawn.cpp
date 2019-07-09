@@ -41,3 +41,8 @@ void ATankPawn::AimAt(FVector HitLocation)
 
 	
 }
+
+void ATankPawn::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
+{
+	TankAimingComponent->SetBarrelReference(BarrelToSet);
+}
