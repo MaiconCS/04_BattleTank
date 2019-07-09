@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "TankAimingcomponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "TankPawn.generated.h"
@@ -15,12 +16,16 @@ public:
 	void AimAt(FVector HitLocation);
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	UTankAimingComponent* TankAimingComponent = nullptr;
+	
+
 
 private:
 	// Sets default values for this pawn's properties
 	ATankPawn();
+
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
