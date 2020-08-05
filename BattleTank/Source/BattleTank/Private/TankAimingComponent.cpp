@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "BattleTank.h"
 #include "TankAimingComponent.h"
+#include "BattleTank.h"
+
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
@@ -38,7 +39,44 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
+	//Protect Barrel
+	if(!Barrel) { return; }
+
+	FVector OutLaunchVelocity;
+	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+
+	if (UGameplayStatics::SuggestProjectileVelocity ///calculate the OutLaunchVelocity, if true
+		(
+			this,
+			OutLaunchVelocity,
+			StartLocation,
+			HitLocation,
+			LaunchSpeed,
+			false, //bool bhighArch >> means, basic, the projectile travel is more slow.
+			0,    //float CollisionRadius.
+			0,   //float OverrrideGravityZ.
+			ESuggestProjVelocityTraceOption::DoNotTrace // all down this option is for debugger
+			//const FCollisionResponseParams & ResponseParam,
+			//const TArray < AActor * > & ActorsToIgnore,
+			//bool bDrawDebug
+		)	
+	   ) 
+	{		
+		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+		auto TankName = GetOwner()->GetName();
+		UE_LOG(LogTemp, Warning, TEXT(" %s Aim at %s "), *TankName, *AimDirection.ToString());
+	}
 	
-	UE_LOG(LogTemp, Warning, TEXT("Firing at %f"), LaunchSpeed);
+
+
+		
+
+
+
+	
+	
 	
 }
+
+
+
