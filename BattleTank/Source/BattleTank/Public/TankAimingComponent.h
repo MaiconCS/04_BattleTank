@@ -2,13 +2,13 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include "Components/StaticMeshComponent.h"
-#include "GameFramework/Actor.h"
-#include "Components/ActorComponent.h"
-#include "Kismet/GameplayStatics.h"
-#include "Kismet/GameplayStaticsTypes.h" 
-#include "TankAimingComponent.generated.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\CoreMinimal.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Components\StaticMeshComponent.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework\Actor.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Components\ActorComponent.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Kismet\GameplayStatics.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Kismet\GameplayStaticsTypes.h" 
+#include "TankAimingComponent.generated.h"//generetade is last include
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -17,9 +17,7 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
+	
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
@@ -27,15 +25,13 @@ public:
 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	
+	//TODO add SetTurretReference
+	   	
 
 private:	
 	
 	UStaticMeshComponent* Barrel = nullptr;
 
-
+	void MoveBarrelTowards(FVector AimDirection);
 		
 };

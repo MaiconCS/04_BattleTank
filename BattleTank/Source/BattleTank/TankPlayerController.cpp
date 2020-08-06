@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "TankPlayerController.h"
-#include "Runtime/Engine/Classes/Engine/World.h"
-#include "BattleTank.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\TankPlayerController.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
 
 #define OUT //does nothing
 
