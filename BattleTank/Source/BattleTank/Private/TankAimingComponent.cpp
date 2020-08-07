@@ -84,6 +84,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	
 
 	Barrel->Elevated(5); //TODO remove magic number
-
+	
 }	
 

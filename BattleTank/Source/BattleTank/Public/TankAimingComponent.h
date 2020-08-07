@@ -9,9 +9,10 @@
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Kismet\GameplayStatics.h"
 ///for debugger #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Kismet\GameplayStaticsTypes.h"
 #include "TankAimingComponent.generated.h"//generetade is last include
+// Foward Declarition
+class UTankBarrel;
 
-class UTankBarrel;// Foward Declarition
-
+//Holds barrel properties and elevated method
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
 {
