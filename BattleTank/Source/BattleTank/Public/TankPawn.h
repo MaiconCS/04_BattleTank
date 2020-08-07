@@ -2,10 +2,12 @@
 
 #pragma once
 
-#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework\Pawn.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\CoreMinimal.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAimingcomponent.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework\Pawn.h"
 #include "TankPawn.generated.h"//generetade is last include
+
+class UTankBarrel;
 
 UCLASS()
 class BATTLETANK_API ATankPawn : public APawn
@@ -17,7 +19,8 @@ public:
 	void AimAt(FVector HitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+
+	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 
 

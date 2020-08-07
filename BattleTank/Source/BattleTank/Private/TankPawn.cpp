@@ -4,6 +4,8 @@
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
 
 
+
+
 // Sets default values
 ATankPawn::ATankPawn()
 {
@@ -13,6 +15,13 @@ ATankPawn::ATankPawn()
 	//No need to protecet points as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
 }
+
+
+void ATankPawn::SetBarrelReference(UTankBarrel* BarrelToSet)
+{
+	TankAimingComponent->SetBarrelReference(BarrelToSet);
+}
+
 
 // Called when the game starts or when spawned
 void ATankPawn::BeginPlay()
@@ -42,7 +51,4 @@ void ATankPawn::AimAt(FVector HitLocation)
 	
 }
 
-void ATankPawn::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
-{
-	TankAimingComponent->SetBarrelReference(BarrelToSet);
-}
+

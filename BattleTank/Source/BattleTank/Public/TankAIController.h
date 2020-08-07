@@ -2,10 +2,10 @@
 
 #pragma once
 
-#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\TankPlayerController.h"
-#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\CoreMinimal.h"
-#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\AIModule\Classes\AIController.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\CoreMinimal.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\TankPlayerController.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
 #include "TankAIController.generated.h"//generetade is last include
 
 /**
