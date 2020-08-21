@@ -10,7 +10,7 @@
 ATankPawn::ATankPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	//No need to protecet points as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
@@ -30,12 +30,6 @@ void ATankPawn::BeginPlay()
 	
 }
 
-// Called every frame
-void ATankPawn::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
 
 // Called to bind functionality to input
 void ATankPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
