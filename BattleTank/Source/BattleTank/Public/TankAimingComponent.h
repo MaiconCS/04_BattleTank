@@ -9,7 +9,7 @@
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Kismet\GameplayStatics.h"
 ///for debugger #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Kismet\GameplayStaticsTypes.h"
 #include "TankAimingComponent.generated.h"//generetade is last include
-// Foward Declarition
+// Foward Declaration
 class UTankBarrel;
 
 //Holds barrel properties and elevated method

@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAimingcomponent.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
 
 

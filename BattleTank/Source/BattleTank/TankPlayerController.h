@@ -4,9 +4,10 @@
 
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\CoreMinimal.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.h"
-#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
 #include "TankPlayerController.generated.h"//generetade is last include
 
+class ATankPawn;
+;
 /**
  * 
  */

@@ -38,9 +38,9 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		StartLocation,
 		HitLocation,
 		LaunchSpeed,
-		//false, //bool bhighArch >> projectile travel is more slow ??
-		//0,    //float CollisionRadius.
-		//0,   //float OverrrideGravityZ.
+		false, //bool bhighArch >> projectile travel is more slow ??
+		0,    //float CollisionRadius.
+		0,   //float OverrrideGravityZ.
 		ESuggestProjVelocityTraceOption::DoNotTrace // all down this option is for debugger
 		//const FCollisionResponseParams & ResponseParam,
 		//const TArray < AActor * > & ActorsToIgnore,

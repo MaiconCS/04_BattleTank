@@ -2,6 +2,7 @@
 
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\TankPlayerController.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
 
 
@@ -39,6 +40,12 @@ ATankPawn* ATankPlayerController::GetControlledTank()
 void ATankPlayerController::AimTowardsCrosshair()
 {
 	if (!GetControlledTank()) { return; }
+
+	/* for test	
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: AimTowardsCrosshair called"), Time);*/
+	
+
 	
 	FVector HitLocation;//out parameter
 	if (GetSightRayHitLocation(HitLocation)) //has "side-effect", is going to line trace.
