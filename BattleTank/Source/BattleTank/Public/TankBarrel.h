@@ -20,14 +20,15 @@ public:
 	void Elevated(float RelativeSpeed);
 
 private:
+	// test between 2 to 5
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxDegreesPerSeconds = 2; 
-
+		float MaxDegreesPerSeconds = 4;  
+	// 10 to 20 realistic
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaximumElevationDegrees = 17; //work fine
-
+		float MaximumElevationDegrees = 16; 
+	//-3.5 realistic, 180 turret not make the barrel into the tank
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MinimunElevationDegrees = -2;  //work fine
+		float MinimunElevationDegrees = -3.5; 
 
 
 
