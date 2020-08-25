@@ -15,6 +15,13 @@ ATankPawn::ATankPawn()
 
 	//No need to protecet points as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
+
+}
+
+void ATankPawn::SetTurretReference(UTankTurret* TurretToSet)
+{	
+	TankAimingComponent->SetTurretReference(TurretToSet);
+
 }
 
 

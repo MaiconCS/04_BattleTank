@@ -7,6 +7,7 @@
 #include "TankPawn.generated.h"//generetade is last include
 
 //Forward declarations
+class UTankTurret;
 class UTankBarrel;
 class UTankAimingComponent;
 
@@ -19,8 +20,12 @@ public:
 	
 	void AimAt(FVector HitLocation);
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
 
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UTankTurret* TurretToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 

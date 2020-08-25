@@ -3,7 +3,7 @@
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAimingComponent.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankBarrel.h"
-
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankTurret.h"
 
 
 // Sets default values for this component's properties
@@ -16,8 +16,18 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet) 
+{	
+	if (!Turret) { return; }
+	Turret = TurretToSet;
+
+}
+
+
+
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
+	if (!Barrel) { return; }
 	Barrel = BarrelToSet;
 
 }
@@ -26,7 +36,8 @@ void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
 	//Protect Barrel
-	if(!Barrel) { return; }
+	if (!Barrel) { return; }
+	if (!Turret) { return; }
 
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
@@ -70,7 +81,9 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 			end program
 
 			*/
+		MoveTurretTowards(AimDirection);
 		MoveBarrelTowards(AimDirection);
+
 
 		auto Time = GetWorld()->GetTimeSeconds();
 
@@ -83,6 +96,17 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		UE_LOG(LogTemp, Warning, TEXT("%f: no aim solve found"), Time);
 	}
 }
+
+void UTankAimingComponent::MoveTurretTowards(FVector AimDirection)
+{
+	auto TurretRotator = Turret->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - TurretRotator;
+
+	Turret->Rotator(DeltaRotator.Yaw);
+
+}
+
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
