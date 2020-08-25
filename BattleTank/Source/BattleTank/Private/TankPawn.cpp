@@ -1,9 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankBarrel.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\Projectile.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAimingcomponent.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
-
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
 
 
 
@@ -28,6 +30,8 @@ void ATankPawn::SetTurretReference(UTankTurret* TurretToSet)
 void ATankPawn::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+
+	Barrel = BarrelToSet;
 }
 
 
@@ -57,5 +61,19 @@ void ATankPawn::Fire()
 {
 	auto Time = GetWorld()->GetTimeSeconds();
 	UE_LOG(LogTemp, Warning, TEXT("%f: tank fire"), Time);
+
+	if (!Barrel) { return; }
+
+	   
+	//spaw a projectile at the socket projectile
+	GetWorld()->SpawnActor<AProjectile>
+	(
+		ProjectileBlueprint,
+		Barrel->GetSocketLocation(FName("Projectile")),
+		Barrel->GetSocketRotation(FName("Projectile"))
+	);
+
+	
+
 
 }
