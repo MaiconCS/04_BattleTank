@@ -60,41 +60,10 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	if (bHaveAimSolution)	    
 	{		
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		//auto TankName = GetOwner()->GetName();
-			//UE_LOG(LogTemp, Warning, TEXT(" %s Aim at %s "), *TankName, *AimDirection.ToString());
-		/*pseudo code for move barrel
-
-			start program
-
-		
-			see the game through the screen (first thing its happen in a game, camera component???)
-
-			input mouse move left or right (axi x ??)
-			input mouse move up dow (axi y ??)
-		
-		
-			output mouse move left or right in camera and turret movement (same move for both ???)
-			output mouse move up or down  in camera and barrel movement
-
-			see the game through the screen
-
-			end program
-
-			*/
-		
+			
 		MoveBarrelTowards(AimDirection);
-
-
-		auto Time = GetWorld()->GetTimeSeconds();
-
-		UE_LOG(LogTemp, Warning, TEXT("%f: aim solution found"), Time);
 	}
-	else 
-	{
-		auto Time = GetWorld()->GetTimeSeconds();
-
-		UE_LOG(LogTemp, Warning, TEXT("%f: no aim solve found"), Time);
-	}
+	//UE_LOG(LogTemp, Warning, TEXT("%f: no aim solve found"), Time);
 }
 
 
