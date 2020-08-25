@@ -14,5 +14,5 @@ void UTankTurret::Rotator(float RelativeSpeed)
 
 	auto RotationClamp = FMath::Clamp<float>(RawNewRotation, MinRotationDegrees, MaxRotationDegrees);
 
-	SetRelativeRotation(FRotator(RotationClamp, 0, 0));
+	SetRelativeRotation(FRotator(0, RotationClamp,  0));
 }
