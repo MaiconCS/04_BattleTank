@@ -22,9 +22,5 @@ private:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
-	///tank controlled by player	
-	ATankPawn* GetTankPlayer(); 
-	///this is the tank itself	
-	ATankPawn* GetTankPawn();  
 
 };
