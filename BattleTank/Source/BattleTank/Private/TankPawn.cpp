@@ -17,6 +17,7 @@ ATankPawn::ATankPawn()
 
 	//No need to protecet points as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
+	   
 
 }
 
@@ -59,21 +60,18 @@ void ATankPawn::AimAt(FVector HitLocation)
 
 void ATankPawn::Fire()
 {
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("%f: tank fire"), Time);
-
 	if (!Barrel) { return; }
 
 	   
 	//spaw a projectile at the socket projectile
-	GetWorld()->SpawnActor<AProjectile>
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>
 	(
-		ProjectileBlueprint,
+	    ProjectileBlueprint,
 		Barrel->GetSocketLocation(FName("Projectile")),
 		Barrel->GetSocketRotation(FName("Projectile"))
 	);
-
 	
+	Projectile->LaunchProjectile(LaunchSpeed);
 
 
 }
