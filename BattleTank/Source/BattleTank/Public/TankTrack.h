@@ -2,15 +2,14 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include "Components/StaticMeshComponent.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\CoreMinimal.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Components\StaticMeshComponent.h"
 #include "TankTrack.generated.h"
 
 /**
  * TankTrack is used to set maximum driving force, and to aply force to the tank
  */
 UCLASS(meta = (BlueprintSpawnableComponent))
-
 class BATTLETANK_API UTankTrack : public UStaticMeshComponent
 {
 	GENERATED_BODY()
