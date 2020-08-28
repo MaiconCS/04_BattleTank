@@ -4,6 +4,7 @@
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankBarrel.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\Projectile.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAimingcomponent.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankMovementcomponent.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
 
@@ -17,7 +18,8 @@ ATankPawn::ATankPawn()
 
 	//No need to protecet points as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
-	   
+
+	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("MovementComponent"));
 
 }
 

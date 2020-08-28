@@ -12,16 +12,7 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	auto ControlledTank = GetControlledTank();
-
-	if (!ControlledTank) 
-	{
-		UE_LOG(LogTemp, Warning, TEXT("TankPlayer No Possessed"));
-	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("TankPlayer possessed %s"), *(ControlledTank->GetName()));
-	}
-	
+		
 }
 
 // Called every frame

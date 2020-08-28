@@ -11,6 +11,7 @@ class UTankTurret;
 class UTankBarrel;
 class UTankAimingComponent;
 class AProjectile;
+class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANK_API ATankPawn : public APawn
@@ -32,7 +33,10 @@ public:
 
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
-	
+
+	//property of a C++ method readable from blueprint !!!!!!!!!!!!!!!!!!!!!
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
 
 
 private:
