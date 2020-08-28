@@ -19,7 +19,8 @@ ATankPawn::ATankPawn()
 	//No need to protecet points as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
 
-	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("MovementComponent"));
+	
+
 
 }
 
