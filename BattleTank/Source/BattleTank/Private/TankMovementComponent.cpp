@@ -15,6 +15,16 @@ UTankMovementComponent::UTankMovementComponent()
 	// ...
 }
 
+void UTankMovementComponent::RequestDirectMove( const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	//No Need to call super as We're replacing the functionality
+	auto TankName = GetOwner()->GetName();
+	auto MoveVelocityString = MoveVelocity.ToString();
+
+	UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *MoveVelocityString)
+}
+
+
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
@@ -66,3 +76,5 @@ void UTankMovementComponent::IntendMoveBackwards(float Throw)
 	RightTrack->SetThrottle(-Throw);
 
 };
+
+
