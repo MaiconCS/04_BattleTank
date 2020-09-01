@@ -18,17 +18,15 @@ UTankMovementComponent::UTankMovementComponent()
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
-	if (!LeftTrackToSet || !RightTrackToSet) { return; }
-
+	
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
 }
 
 
 void UTankMovementComponent::IntendMoveForward(float Throw) 
-{
-	//auto Name = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("Intend move forward throw: %f"), Throw);
+{	//KEY W
+	if (!LeftTrack || !RightTrack) { return; }
 
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
@@ -36,4 +34,35 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 	//TODO prevent double speed due to dual controls
 };
 
+void UTankMovementComponent::IntendTurnRight(float Throw)
+{	//KEY D
+	//auto Name = GetName();
+	//UE_LOG(LogTemp, Warning, TEXT("Intend turn right: %f"), Throw);
+	if (!LeftTrack || !RightTrack) { return; }
 
+	LeftTrack->SetThrottle(Throw);
+	RightTrack->SetThrottle(-Throw);
+
+};
+
+void UTankMovementComponent::IntendTurnLeft(float Throw)
+{	//KEY A	
+	//auto Name = GetName();
+	//UE_LOG(LogTemp, Warning, TEXT("Intend turn right: %f"), Throw);
+	if (!LeftTrack || !RightTrack) { return; }
+
+	LeftTrack->SetThrottle(-Throw);
+	RightTrack->SetThrottle(Throw);
+
+};
+
+void UTankMovementComponent::IntendMoveBackwards(float Throw)
+{	//KEY S 
+	//auto Name = GetName();
+	//UE_LOG(LogTemp, Warning, TEXT("Intend turn right: %f"), Throw);
+	if (!LeftTrack || !RightTrack) { return; }
+
+	LeftTrack->SetThrottle(-Throw);
+	RightTrack->SetThrottle(-Throw);
+
+};
