@@ -18,7 +18,7 @@ class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
 
 public:		
 	
-	UTankMovementComponent();
+	//UTankMovementComponent();
 
 	//TODO check best protection
 	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
