@@ -1,5 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
+// Copyright AbraceTI Ltd.
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAimingComponent.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankBarrel.h"
@@ -14,22 +13,6 @@ UTankAimingComponent::UTankAimingComponent()
 	PrimaryComponentTick.bCanEverTick = false; 
 
 	// ...
-}
-
-void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet) 
-{	
-	
-	Turret = TurretToSet;
-
-}
-
-
-
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
-{
-	
-	Barrel = BarrelToSet;
-
 }
 
 
@@ -71,6 +54,9 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
+	if (!Barrel || !Turret) { return; }
+
+	
 	//work out difference between current reaction, and aim direction
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
@@ -82,3 +68,9 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	Turret->Rotator(DeltaRotator.Yaw);
 }	
 
+void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
+{
+
+	Barrel = BarrelToSet;
+	Turret = TurretToSet;
+}

@@ -21,13 +21,13 @@ public:
 
 private:
 	// test between 10 to 20
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		float MaxDegreesPerSeconds = 20;  
 	// 10 to 20 realistic
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		float MaximumElevationDegrees = 16; 
 	//-3.5 realistic, 180° turret not make the barrel into the tank
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		float MinimunElevationDegrees = -3.5; 
 
 
