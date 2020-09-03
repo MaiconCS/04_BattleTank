@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Descript,on page of Project Settings.
+// Copyright AbraceTI Ltd.
 
 #pragma once
 
