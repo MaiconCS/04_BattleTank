@@ -37,8 +37,13 @@ protected:
 
 
 private:
+
+	
+
 	// Sets default values for this pawn's properties
 	ATankPawn();
+
+		virtual void BeginPlay() override;
 
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
