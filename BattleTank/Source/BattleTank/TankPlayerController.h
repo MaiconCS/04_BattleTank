@@ -7,9 +7,10 @@
 #include "TankPlayerController.generated.h"//generetade is last include
 
 class ATankPawn;
+class UTankAimingComponent;
 ;
 /**
- * 
+ * Responsible for helping the player aim.
  */
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
@@ -21,6 +22,8 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATankPawn* GetControlledTank() const;
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
 private:
 	

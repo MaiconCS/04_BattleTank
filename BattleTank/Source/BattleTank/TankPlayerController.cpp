@@ -1,6 +1,7 @@
 // Copyright AbraceTI Ltd.
 
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\TankPlayerController.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\public\TankAimingComponent.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
@@ -12,7 +13,16 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-		
+	
+	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (AimingComponent) 
+	{
+		FoundAimingComponent(AimingComponent);
+	}
+	else 
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player Controller can't find aiming component at Begin Play "))
+	}
 }
 
 // Called every frame
