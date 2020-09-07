@@ -11,7 +11,8 @@ AProjectile::AProjectile()
 	PrimaryActorTick.bCanEverTick = true;
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(FName("ProjectileMovement"));
-	//doesnt start flying off, until we actually press the button to fire it.
+	
+	//prevent start flying off, until we actually press the button to fire it.
 	ProjectileMovement->bAutoActivate = false;
 
 }
