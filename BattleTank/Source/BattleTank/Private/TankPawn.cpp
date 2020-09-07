@@ -18,17 +18,17 @@ ATankPawn::ATankPawn()
 	PrimaryActorTick.bCanEverTick = false;
 
 
-	auto TankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s PREFIX: Tank C++ Construct"), *TankName)
+	
+	//UE_LOG(LogTemp, Warning, TEXT("%s PREFIX: Tank C++ Construct"), *TankName)
 }
 
 void ATankPawn::BeginPlay()
 {	
 	Super::BeginPlay(); // Needed for BP Begin Play to run
 
-	auto TankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s PREFIX: Tank C++ Begin Play"), *TankName)
 
+
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 void ATankPawn::AimAt(FVector HitLocation)
