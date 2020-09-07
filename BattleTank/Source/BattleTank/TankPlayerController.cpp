@@ -4,6 +4,7 @@
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\public\TankAimingComponent.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc\AssertionMacros.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
 
 
@@ -15,7 +16,7 @@ void ATankPlayerController::BeginPlay()
 	Super::BeginPlay();
 	
 	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
-	if (AimingComponent) 
+	if (ensure(AimingComponent)) 
 	{
 		FoundAimingComponent(AimingComponent);
 	}
@@ -40,7 +41,7 @@ ATankPawn* ATankPlayerController::GetControlledTank()const
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!GetControlledTank()) { return; }
+	if (!ensure(GetControlledTank())) { return; }
 
 	/* for test	
 	auto Time = GetWorld()->GetTimeSeconds();

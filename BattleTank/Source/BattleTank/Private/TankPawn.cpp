@@ -6,6 +6,7 @@
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAimingcomponent.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankMovementcomponent.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc\AssertionMacros.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
 
 
@@ -33,7 +34,7 @@ void ATankPawn::BeginPlay()
 
 void ATankPawn::AimAt(FVector HitLocation)
 {	
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 
@@ -42,9 +43,11 @@ void ATankPawn::AimAt(FVector HitLocation)
 
 void ATankPawn::Fire()
 {
+	if (!ensure (Barrel) ) { return; }
+
 	bool isReload = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 	
-	if (Barrel && isReload ) 
+	if ( isReload ) 
 	{ 
 		//spaw a projectile at the socket projectile
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>

@@ -29,7 +29,7 @@ void UTankMovementComponent::RequestDirectMove( const FVector& MoveVelocity, boo
 
 void UTankMovementComponent::IntendMoveForward(float Throw) 
 {	//KEY W
-	if (!LeftTrack || !RightTrack) { return; }
+	if (!ensure(LeftTrack && RightTrack)) { return; }
 
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
@@ -39,7 +39,7 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 void UTankMovementComponent::IntendTurnRight(float Throw)
 {	//KEY D
 	
-	if (!LeftTrack || !RightTrack) { return; }
+	if (!ensure(LeftTrack && RightTrack)) { return; }
 
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
@@ -49,7 +49,7 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 void UTankMovementComponent::IntendTurnLeft(float Throw)
 {	//KEY A	
 
-	if (!LeftTrack || !RightTrack) { return; }
+	if (!ensure(LeftTrack && RightTrack)) { return; }
 
 	LeftTrack->SetThrottle(-Throw);
 	RightTrack->SetThrottle(Throw);
@@ -59,7 +59,7 @@ void UTankMovementComponent::IntendTurnLeft(float Throw)
 void UTankMovementComponent::IntendMoveBackwards(float Throw)
 {	//KEY S 
 	
-	if (!LeftTrack || !RightTrack) { return; }
+	if (!ensure(LeftTrack && RightTrack)) { return; }
 
 	LeftTrack->SetThrottle(-Throw);
 	RightTrack->SetThrottle(-Throw);

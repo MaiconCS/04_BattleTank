@@ -3,6 +3,7 @@
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankBarrel.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankTurret.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc\AssertionMacros.h"
 
 
 // Sets default values for this component's properties
@@ -19,7 +20,7 @@ UTankAimingComponent::UTankAimingComponent()
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
 	//Protect Barrel
-	if (!Barrel) { return; }
+	if (!ensure(Barrel)) { return; }
 	
 
 	FVector OutLaunchVelocity;
@@ -54,7 +55,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
-	if (!Barrel || !Turret) { return; }
+	if (ensure(Barrel) || ensure(Turret)) { return; }
 
 	
 	//work out difference between current reaction, and aim direction

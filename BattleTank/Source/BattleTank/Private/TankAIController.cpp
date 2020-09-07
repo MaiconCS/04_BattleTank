@@ -2,6 +2,7 @@
 
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAIController.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc\AssertionMacros.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
 
@@ -19,7 +20,7 @@ void ATankAIController::Tick(float DeltaTime)
 	///this is the tank itself	
 	auto ControlledTank = Cast<ATankPawn>(GetPawn());
 	
-	if (PlayerTank)
+	if (ensure(PlayerTank))
 	{
 		//Todo MOVE TOWARDS the player
 		MoveToActor(PlayerTank, AcceptanceRadius ); //TODO check radius in cm
