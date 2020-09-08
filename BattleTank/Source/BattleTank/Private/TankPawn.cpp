@@ -1,11 +1,11 @@
 // Copyright AbraceTI Ltd.
 
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
-#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankBarrel.h"
-#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\Projectile.h"
+//#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankBarrel.h" ReFactoring
+//#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\Projectile.h" ReFactoring
 //#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAimingcomponent.h" ReFactoring
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
-#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc\AssertionMacros.h"
+//#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc\AssertionMacros.h" ReFactoring
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
 
 
@@ -43,7 +43,7 @@ void ATankPawn::AimAt(FVector HitLocation)
 	
 }*/
 
-
+/* ReFactoring
 void ATankPawn::Fire()
 {
 	if (!ensure (Barrel) ) { return; }
@@ -67,4 +67,4 @@ void ATankPawn::Fire()
 	
 
 
-}
+}*/

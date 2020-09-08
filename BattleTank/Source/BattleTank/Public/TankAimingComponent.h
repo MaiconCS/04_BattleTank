@@ -24,7 +24,7 @@ enum class EFiringState:uint8
 // Foward Declaration
 class UTankTurret;
 class UTankBarrel;
-
+class AProjectile;
 
 //Holds barrel properties and elevated method
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -45,6 +45,10 @@ public:
 
 	void AimAt(FVector HitLocation);
 
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	void Fire();
+
 protected:
 	
 	UPROPERTY(BlueprintReadOnly, Category = "State")
@@ -54,10 +58,22 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 10000;
-	
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	//TSubclassOf<AProjectile> ProjectileBlueprint;//Alternative https://docs.unrealengine.com/en-US/Programming/UnrealArchitecture/TSubclassOf/index.html
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	//EditDefaultsOnly make this values default for all tanks, not allow each tank has different values
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ReloadTimeInSeconds = 3;
+
+	double LastFireTime = 0;
+
+
 	UTankTurret* Turret = nullptr;
 	UTankBarrel* Barrel = nullptr;	
 
-	void MoveBarrelTowards(FVector AimDirection);	
+	void MoveBarrelTowards(FVector AimDirection);
+
 
 };
