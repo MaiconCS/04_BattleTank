@@ -9,7 +9,7 @@
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject\Class.h"
 #include "TankAimingComponent.generated.h"//generetade is last include
 
-//Enum for aimming state
+//Enum for aimming state 
 UENUM()
 
 enum class EFiringState:uint8
@@ -41,14 +41,19 @@ public:
 	UTankAimingComponent();	
 
 
-	void AimAt(FVector HitLocation, float LaunchSpeed);
+	//void AimAt(FVector HitLocation, float LaunchSpeed); ReFactoring
 
+	void AimAt(FVector HitLocation);
 
 protected:
+	
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState FiringState = EFiringState::Aiming;
 
 private:	
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 10000;
 	
 	UTankTurret* Turret = nullptr;
 	UTankBarrel* Barrel = nullptr;	

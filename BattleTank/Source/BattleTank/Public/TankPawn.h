@@ -9,7 +9,7 @@
 //Forward declarations
 class UTankTurret;
 class UTankBarrel;
-class UTankAimingComponent;
+//class UTankAimingComponent; ReFactoring
 class AProjectile;
 
 
@@ -20,29 +20,32 @@ class BATTLETANK_API ATankPawn : public APawn
 
 public:
 	
-	void AimAt(FVector HitLocation);
+	//void AimAt(FVector HitLocation); ReFactoring
 
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 
 protected:
+	/* ReFactoring
+
 	//Property of a C++ method readable from blueprint
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
-
+	
+	*/
 
 private:	
 
 	// Sets default values for this pawn's properties
 	ATankPawn();
 
-		virtual void BeginPlay() override;
+	virtual void BeginPlay() override;
 
-
+	//TODO ReFactoring LaunchSpeed
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float LaunchSpeed = 10000; 
-
+	float LaunchSpeed = 10000; 
+	
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		//TSubclassOf<AProjectile> ProjectileBlueprint;//Alternative https://docs.unrealengine.com/en-US/Programming/UnrealArchitecture/TSubclassOf/index.html

@@ -6,7 +6,7 @@
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.h"
 #include "TankPlayerController.generated.h"//generetade is last include
 
-class ATankPawn;
+//class ATankPawn; ReFactoring
 class UTankAimingComponent;
 ;
 /**
@@ -18,10 +18,13 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 
 protected:
-
+	/*ReFactoring 
+	
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATankPawn* GetControlledTank() const;
-
+	
+	*/
+	
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 

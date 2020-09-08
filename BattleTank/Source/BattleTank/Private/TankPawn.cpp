@@ -3,7 +3,7 @@
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankBarrel.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\Projectile.h"
-#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAimingcomponent.h"
+//#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAimingcomponent.h" ReFactoring
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc\AssertionMacros.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
@@ -27,9 +27,12 @@ void ATankPawn::BeginPlay()
 	Super::BeginPlay(); // Needed for BP Begin Play to run
 
 
-
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
+	// ReFactoring
+	//TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
+
+
+/* ReFactoring
 
 void ATankPawn::AimAt(FVector HitLocation)
 {	
@@ -38,7 +41,8 @@ void ATankPawn::AimAt(FVector HitLocation)
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 
 	
-}
+}*/
+
 
 void ATankPawn::Fire()
 {
@@ -59,7 +63,7 @@ void ATankPawn::Fire()
 		Projectile->LaunchProjectile(LaunchSpeed);
 		
 		LastFireTime = FPlatformTime::Seconds();
-	}	   
+	}	  
 	
 
 

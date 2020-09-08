@@ -8,7 +8,7 @@
 #include "TankAIController.generated.h"//generetade is last include
 
 //Forward declarations
-class ATankPawn;
+class ATankAimingComponent;
 /**
  * 
  */
@@ -16,6 +16,8 @@ UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
+
+
 	
 private:
 	

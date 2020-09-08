@@ -3,7 +3,7 @@
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\TankPlayerController.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\public\TankAimingComponent.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
-#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
+//#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h" ReFactoring
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc\AssertionMacros.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
 
@@ -15,7 +15,7 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) { return; }
 	
 	FoundAimingComponent(AimingComponent);
@@ -31,14 +31,16 @@ void ATankPlayerController::Tick(float DeltaTime)
 	AimTowardsCrosshair();
 }
 
+/* ReFactoring
 ATankPawn* ATankPlayerController::GetControlledTank()const
 {
 	return Cast<ATankPawn>(GetPawn());
 }
-
+*/
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!ensure(GetControlledTank())) { return; }
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) { return; }
 
 	/* for test	
 	auto Time = GetWorld()->GetTimeSeconds();
@@ -50,7 +52,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 	if (GetSightRayHitLocation(HitLocation)) //has "side-effect", is going to line trace.
 	{
 		//report tank aim to location.
-		GetControlledTank()->AimAt(HitLocation);
+		AimingComponent->AimAt(HitLocation);
 	}	
 }
 
