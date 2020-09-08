@@ -17,23 +17,51 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
+
 void UTankAimingComponent::BeginPlay()
 {
 	//First fire is after initial reload
 	LastFireTime = FPlatformTime::Seconds();
 }
 
-void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
-{
-	UE_LOG (LogTemp, Warning, TEXT("TICK"))
-		if ((FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds) 
-		{
-			FiringState = EFiringState::Reloading;
 
-		}
-	//TODO handle aiming color change
+void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
+{
+
+	Barrel = BarrelToSet;
+	Turret = TurretToSet;
+}
+
+
+bool UTankAimingComponent::IsBarrelMoving()
+{
+	if (!ensure(Barrel)) { return false;	}
+
+	auto BarrelForward = Barrel->GetForwardVector();
+
+	return !BarrelForward.Equals(AimDirection, 0.01); // Vectors are Equals ?
 
 }
+
+
+void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
+{
+	//UE_LOG (LogTemp, Warning, TEXT("TICK"))
+		if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds) 
+		{
+			FiringState = EFiringState::Reloading;
+		}
+		else if (IsBarrelMoving())
+		{
+			FiringState = EFiringState::Aiming;
+		}
+		else 
+		{
+			FiringState = EFiringState::Locked;
+		}
+
+}
+
 
 void UTankAimingComponent::AimAt(FVector HitLocation)
 {
@@ -61,14 +89,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 	);
 	if (bHaveAimSolution)	    
 	{		
-		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+		AimDirection = OutLaunchVelocity.GetSafeNormal();
 			
 		MoveBarrelTowards(AimDirection);
 	}
 	//UE_LOG(LogTemp, Warning, TEXT("%f: no aim solve found"), Time);
 }
-
-
 
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
@@ -87,12 +113,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	Barrel->Elevated(DeltaRotator.Pitch);
 }	
 
-void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
-{
-
-	Barrel = BarrelToSet;
-	Turret = TurretToSet;
-}
 
 void UTankAimingComponent::Fire()
 {
