@@ -20,7 +20,6 @@ void ATankPlayerController::BeginPlay()
 	
 	FoundAimingComponent(AimingComponent);
 	
-
 }
 
 // Called every frame
@@ -39,6 +38,8 @@ ATankPawn* ATankPlayerController::GetControlledTank()const
 */
 void ATankPlayerController::AimTowardsCrosshair()
 {
+	if (!GetPawn()) { return; } //e.g. work around if not tank posessed.
+
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) { return; }
 
