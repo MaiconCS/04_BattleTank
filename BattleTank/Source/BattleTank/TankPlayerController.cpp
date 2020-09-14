@@ -30,27 +30,22 @@ void ATankPlayerController::Tick(float DeltaTime)
 	AimTowardsCrosshair();
 }
 
-/* ReFactoring
-ATankPawn* ATankPlayerController::GetControlledTank()const
-{
-	return Cast<ATankPawn>(GetPawn());
-}
-*/
+
 void ATankPlayerController::AimTowardsCrosshair()
 {
 	if (!GetPawn()) { return; } //e.g. work around if not tank posessed.
 
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) { return; }
-
-	/* for test	
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("%f: AimTowardsCrosshair called"), Time);*/
 	
-
-	
+		
 	FVector HitLocation;//out parameter
-	if (GetSightRayHitLocation(HitLocation)) //has "side-effect", is going to line trace.
+
+	bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
+
+	UE_LOG(LogTemp, Warning, TEXT(" bGotHitLocation : %i "), bGotHitLocation);
+	
+	if (bGotHitLocation) //has "side-effect", is going to line trace.
 	{
 		//report tank aim to location.
 		AimingComponent->AimAt(HitLocation);
@@ -64,7 +59,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation)const
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
-	//UE_LOG(LogTemp, Warning, TEXT("ScreenLocation: %s"), *ScreenLocation.ToString());
+	
 	
 
 	//"de-project" the screen position of the crosshair toa world direction
@@ -74,10 +69,10 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation)const
 		
 		//UE_LOG(LogTemp, Warning, TEXT("Look direction %s"), *LookDirection.ToString());
 		//line-trace along that LookDirection, and see what we hit (up to max range)
-		GetLookVectorHitLocation(LookDirection, OutHitLocation);
+		return GetLookVectorHitLocation(LookDirection, OutHitLocation);
 	}
 	   
-	return true;
+	return false;
 
 }
 //!!!!!!!!!!!!!!LineTraceSingleByChannel()!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
