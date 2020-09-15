@@ -62,6 +62,11 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 }
 
+EFiringState UTankAimingComponent::GetFiringState() const
+{
+	return FiringState;
+}
+
 
 void UTankAimingComponent::AimAt(FVector HitLocation)
 {
@@ -149,6 +154,7 @@ void UTankAimingComponent::Fire()
 	}
 
 }
+
 
 
 

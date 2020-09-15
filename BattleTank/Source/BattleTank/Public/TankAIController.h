@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright AbraceTI Ltd.
 
 #pragma once
 
@@ -7,25 +7,29 @@
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\TankPlayerController.h"
 #include "TankAIController.generated.h"//generetade is last include
 
+
 //Forward declarations
 class ATankAimingComponent;
 /**
  * 
  */
+
 UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 
 
-	
+protected:
+
+	//How close can the AI get
+	UPROPERTY(EditAnywhere, Category = "Range AI") //Consider EditDefaultsOnly
+	float AcceptanceRadius = 10000;
+
 private:
-	
+
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
-
-	//How close can the AI get
-	float AcceptanceRadius = 3000;
-
+	
 };
