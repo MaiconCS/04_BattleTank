@@ -124,13 +124,12 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	//elevated (-1)down (+1)up	
 	Turret->Rotator(DeltaRotator.Yaw);
 	
-	//always yaw the shortest way
-	//this is the right fix FMath::Abs(DeltaRotator.Yaw)
-	if (DeltaRotator.Yaw < 180) 
+	//always yaw the shortest way	
+	if (FMath::Abs(DeltaRotator.Yaw) < 180)
 	{
 		Turret->Rotator(DeltaRotator.Yaw);
 	}
-	else 
+	else // Avoid going the long way 
 	{
 		Turret->Rotator(DeltaRotator.Yaw);
 	}
@@ -159,6 +158,7 @@ void UTankAimingComponent::Fire()
 
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
+
 		RoundsLeft--;
 		
 	}

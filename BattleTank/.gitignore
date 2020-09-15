@@ -79,6 +79,11 @@ Plugins/*/Intermediate/*
 # Cache files for the editor to use
 DerivedDataCache/*
 
+#Unreal Assets
+*.uasset
+
+*.umap
+
 #################
 ##FOLDER ignore##
 #################
