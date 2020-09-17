@@ -58,7 +58,7 @@ public:
 	EFiringState GetFiringState() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int GetRoundsLeft() const;
+	int32 GetRoundsLeft() const;
 
 protected:
 	
@@ -73,17 +73,22 @@ private:
 
 	bool IsBarrelMoving();
 
-
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 10000;
-
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	//TSubclassOf<AProjectile> ProjectileBlueprint;//Alternative https://docs.unrealengine.com/en-US/Programming/UnrealArchitecture/TSubclassOf/index.html
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 10000;
+
+
 	//EditDefaultsOnly make this values default for all tanks, not allow each tank has different values
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
+
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 RoundsLeft = 10;
 
 	double LastFireTime = 0;
 
@@ -93,6 +98,5 @@ private:
 	UTankBarrel* Barrel = nullptr;	
 
 	void MoveBarrelTowards(FVector AimDirection);
-
-	int RoundsLeft = 10;
+	
 };
