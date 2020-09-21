@@ -20,7 +20,7 @@ void UTankTrack::BeginPlay()
 
 void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
 {
-	UE_LOG(LogTemp, Warning, TEXT("OnHit"))
+	//UE_LOG(LogTemp, Warning, TEXT("OnHit"))
 
 	//Drive the tracks
 	DriveTrack();
@@ -35,9 +35,7 @@ void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UP
 
 void UTankTrack::ApplySidewaysForce()
 {
-
-	//UE_LOG(LogTemp, Warning, TEXT("Tick TRACK"))
-
+	
 	//Calculate the slipage speed
 	//Work out the required accelelration this frame to correct
 	auto SlippageSpeed = FVector::DotProduct(GetRightVector(), GetComponentVelocity());

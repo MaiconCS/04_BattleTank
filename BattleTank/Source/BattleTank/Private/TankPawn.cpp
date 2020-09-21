@@ -1,13 +1,8 @@
 // Copyright AbraceTI Ltd.
 
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h"
-//#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankBarrel.h" ReFactoring
-//#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\Projectile.h" ReFactoring
-//#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAimingcomponent.h" ReFactoring
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
-//#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc\AssertionMacros.h" ReFactoring
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
-
 
 
 
@@ -27,44 +22,8 @@ void ATankPawn::BeginPlay()
 	Super::BeginPlay(); // Needed for BP Begin Play to run
 
 
-	// ReFactoring
-	//TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 
-/* ReFactoring
-
-void ATankPawn::AimAt(FVector HitLocation)
-{	
-	if (!ensure(TankAimingComponent)) { return; }
-
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-
-	
-}*/
-
-/* ReFactoring
-void ATankPawn::Fire()
-{
-	if (!ensure (Barrel) ) { return; }
-
-	bool isReload = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-	
-	if ( isReload ) 
-	{ 
-		//spaw a projectile at the socket projectile
-		auto Projectile = GetWorld()->SpawnActor<AProjectile>
-			(
-				ProjectileBlueprint,
-				Barrel->GetSocketLocation(FName("Projectile")),
-				Barrel->GetSocketRotation(FName("Projectile"))
-			);
-
-		Projectile->LaunchProjectile(LaunchSpeed);
-		
-		LastFireTime = FPlatformTime::Seconds();
-	}	  
-	
 
 
-}*/
