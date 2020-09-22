@@ -6,6 +6,7 @@
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework\Actor.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework\ProjectileMovementComponent.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Particles\ParticleSystemComponent.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\PhysicsEngine\RadialForceComponent.h"
 #include "Projectile.generated.h"
 
 UCLASS()
@@ -45,7 +46,8 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UParticleSystemComponent * ImpactBlast = nullptr;
 
-	
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	URadialForceComponent*  ExplosionForce = nullptr;
 
 
 
