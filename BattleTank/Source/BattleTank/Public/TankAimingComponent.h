@@ -85,7 +85,7 @@ private:
 
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	int32 RoundsLeft = 10;
+	int32 RoundsLeft = 40;
 
 	double LastFireTime = 0;
 

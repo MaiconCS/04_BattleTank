@@ -3,6 +3,8 @@
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\Projectile.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework\Actor.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Public\TimerManager.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Kismet\GameplayStatics.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework\DamageType.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\EngineTypes.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Components\SceneComponent.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
@@ -59,20 +61,36 @@ void AProjectile::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor,
 	SetRootComponent(ImpactBlast);
 	CollisionMesh->DestroyComponent();
 
-	/*How to use a delegate from the engine*/
-	
-	//first seek the function and types, in this case SetTimer
+	UGameplayStatics::ApplyRadialDamage
+	(
+		this,
+		ProjectileDamage,          // const UObject * WorldContextObject,  
+		GetActorLocation(),        // float BaseDamage,
+		ExplosionForce->Radius,    // const FVector & Origin, (for consistancy)
+		UDamageType::StaticClass(),// float DamageRadius,
+		TArray<AActor*>()		   // TSubclassOf < class UDamageType > DamageTypeClass,
+							       // const TArray < AActor * > & IgnoreActors,
+								   // AActor * DamageCauser,
+								   // AController * InstigatedByController,
+								   // bool bDoFullDamage,
+								   // ECollisionChannel DamagePreventionChannel
+	);
 
-	//2 change the parameters of the function
+
+	/* How to use a delegate from the engine	
+	   first seek the function and types, in this case SetTimer
+	   2 change the parameters of the function	
+	*/
+
 	FTimerHandle Timer; // first parameter, 
 
 	GetWorld()->GetTimerManager().SetTimer( 
-		Timer,                        //FTimerHandle & InOutHandle,
-		this,                        //UserClass * InObj, (use this for reference this class)         		
-		&AProjectile::OnTimerExpire,//typename FTimerDelegate::TUObjectMethodDelegate_Const< UserClass >::FMethodPtr InTimerMethod,
-		DestroyDelay,            //float InRate,
-		false                     //bool InbLoop,
-					             //float InFirstDelay (not used)
+		Timer,                      // FTimerHandle & InOutHandle,
+		this,                       // UserClass * InObj, (use this for reference this class)         		
+		&AProjectile::OnTimerExpire,// typename FTimerDelegate::TUObjectMethodDelegate_Const< UserClass >::FMethodPtr InTimerMethod,
+		DestroyDelay,               // float InRate,
+		false                       // bool InbLoop,
+					                // float InFirstDelay (not used)
 	);
 }
 

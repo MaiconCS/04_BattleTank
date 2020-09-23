@@ -32,6 +32,10 @@ private:
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit);
+	
+	//Damage Per Hit
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float ProjectileDamage = 20.f;
 
 	//Used to delete the instances of PrjectileBlueprint in world /////////////////////////////////////////////////////////////
 	void OnTimerExpire();
