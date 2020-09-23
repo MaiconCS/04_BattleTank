@@ -14,10 +14,6 @@ class BATTLETANK_API ATankPawn : public APawn
 	GENERATED_BODY()
 
 public:
-
-	// Sets default values for this pawn's properties
-	ATankPawn();
-
 	//Called By the Engine when actor damage is deal
 	virtual float TakeDamage
 	(
@@ -28,11 +24,17 @@ public:
 	)
 	override;
 
+	//Return Current Health as a percentage of starting health, between 0 and 1.
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetHealthPercent() const;
 
 protected:
 
 
 private:	
+	// Sets default values for this pawn's properties
+	ATankPawn();
+
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	int32 StartingHealth = 100;
 

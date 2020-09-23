@@ -9,6 +9,11 @@
 
 
 
+float ATankPawn::GetHealthPercent() const
+{
+	return (float)CurrentlyHealth / (float)StartingHealth;
+}
+
 // Sets default values
 ATankPawn::ATankPawn()
 {
