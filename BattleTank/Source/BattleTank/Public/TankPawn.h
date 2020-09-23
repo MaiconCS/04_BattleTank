@@ -6,7 +6,7 @@
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework\Pawn.h"
 #include "TankPawn.generated.h"//generetade is last include
 
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDelegate);
 
 UCLASS()
 class BATTLETANK_API ATankPawn : public APawn
@@ -27,6 +27,9 @@ public:
 	//Return Current Health as a percentage of starting health, between 0 and 1.
 	UFUNCTION(BlueprintPure, Category = "Health")
 	float GetHealthPercent() const;
+
+	FTankDelegate OnDeath;
+
 
 protected:
 

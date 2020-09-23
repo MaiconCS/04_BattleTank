@@ -34,9 +34,11 @@ float ATankPawn::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent
 
 	CurrentlyHealth -= DamageToApply;
 
-	if (CurrentlyHealth <=0 ) 
-	{
-		UE_LOG(LogTemp, Warning, TEXT(" Tank DieD "))
+	if (CurrentlyHealth <= 0 ) 
+	{	
+		//Use of Delegate
+		OnDeath.Broadcast();
+		
 	}
 	//UE_LOG(LogTemp, Warning, TEXT(" DamageAmount : %f, DamageToApply : %i  "), DamageAmount, DamageToApply);
 

@@ -14,10 +14,14 @@ class ATankAimingComponent;
  * 
  */
 
+
+
 UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
+
+
 
 
 protected:
@@ -30,6 +34,11 @@ private:
 
 	virtual void BeginPlay() override;
 
+	virtual void SetPawn(APawn* InPawn) override;
+	
 	virtual void Tick(float DeltaTime) override;
 	
+	UFUNCTION()
+	void OnPossessedTankDeath();
+
 };
