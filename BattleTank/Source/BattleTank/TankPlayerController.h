@@ -19,16 +19,20 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 
 protected:
 	/*ReFactoring 
-	
 	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATankPawn* GetControlledTank() const;
-	
+	ATankPawn* GetControlledTank() const;	
 	*/
 	
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
+	UFUNCTION()
+	void OnPossessedTankDeath();
+
 private:
+	
+	void SetPawn(APawn * InPawn);
+
 	
 	virtual void BeginPlay() override;
 
@@ -45,8 +49,8 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000.f;
 
-
 	bool GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const;
+	
 	//Return hit if is visible = ECC_Visibility (if you see, you hit).
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector & HitLocation) const;
 

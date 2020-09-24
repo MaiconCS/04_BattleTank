@@ -3,12 +3,33 @@
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\TankPlayerController.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\public\TankAimingComponent.h"
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h" // Implement OnDeath() delegate
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc\AssertionMacros.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
 
 
 #define OUT //does nothing
 
+void ATankPlayerController::SetPawn(APawn * InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn) {
+		auto PossessedTank = Cast<ATankPawn>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+		//TODO subscribe our local method to the  tank death event
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPossessedTankDeath);
+
+
+	}
+}
+
+//Deposses controller of the tank from player after dead.
+void ATankPlayerController::OnPossessedTankDeath()
+{
+	//UE_LOG(LogTemp, Warning, TEXT(" Received delegate broadcasting ") )
+
+	StartSpectatingOnly();
+}
 
 void ATankPlayerController::BeginPlay()
 {

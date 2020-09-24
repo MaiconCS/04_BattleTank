@@ -25,6 +25,14 @@ ATankPawn::ATankPawn()
 	//UE_LOG(LogTemp, Warning, TEXT("%s PREFIX: Tank C++ Construct"), *TankName)
 }
 
+void ATankPawn::BeginPlay()
+{
+	Super::BeginPlay(); // Needed for BP Begin Play to run
+
+	//set the value at right time in execution, no rewrite the same 100 in StartingHealth;
+	CurrentlyHealth = StartingHealth;
+}
+
 float ATankPawn::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser)
 {
 	//Simplifies the damage sistem converting all damage to int with RoundTo.
@@ -47,12 +55,7 @@ float ATankPawn::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent
 	   	 
 }
 
-void ATankPawn::BeginPlay()
-{	
-	Super::BeginPlay(); // Needed for BP Begin Play to run
 
-
-}
 
 
 

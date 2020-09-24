@@ -5,7 +5,7 @@
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankAimingComponent.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc\AssertionMacros.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine\World.h"
-#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h" // Implement OnDeath
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankPawn.h" // Implement OnDeath() delegate
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.h"
 //Depends on movement component via pathfinding system
 
@@ -26,12 +26,17 @@ void ATankAIController::SetPawn(APawn * InPawn)
 		//TODO subscribe our local method to the  tank death event
 		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossessedTankDeath);
 
+
 	}
 }
 
 void ATankAIController::OnPossessedTankDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT(" Received delegate broadcasting ") )
+	//UE_LOG(LogTemp, Warning, TEXT(" Received delegate broadcasting ") )
+	
+	if (!ensure(GetPawn())) { return; } //TODO remove ensure if ok
+	GetPawn()->DetachFromControllerPendingDestroy();
+
 }
 
 void ATankAIController::Tick(float DeltaTime)
@@ -48,7 +53,7 @@ void ATankAIController::Tick(float DeltaTime)
 	if (ensure(PlayerTank && ControlledTank))
 	{
 		//Todo MOVE TOWARDS the player
-		MoveToActor(PlayerTank, AcceptanceRadius); //TODO check radius in cm
+		MoveToActor(PlayerTank, AcceptanceRadius); 
 
 		//Aim towards the player( name of the method is different)
 		auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();

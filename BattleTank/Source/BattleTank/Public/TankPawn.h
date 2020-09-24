@@ -42,7 +42,7 @@ private:
 	int32 StartingHealth = 100;
 
 	UPROPERTY(VisibleAnywhere, Category = "Health")
-	int32 CurrentlyHealth = StartingHealth;
+	int32 CurrentlyHealth; // Initialized in BeginPlay
 
 	//float DamageAmount;
 	
