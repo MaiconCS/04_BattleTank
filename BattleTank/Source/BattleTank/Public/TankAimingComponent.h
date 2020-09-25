@@ -42,13 +42,9 @@ public:
 	
 	// Sets default values for this component's properties
 	UTankAimingComponent();	
-
-
-	//void AimAt(FVector HitLocation, float LaunchSpeed); ReFactoring
-
+	   	
 	void AimAt(FVector HitLocation);
-
-
+	
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 

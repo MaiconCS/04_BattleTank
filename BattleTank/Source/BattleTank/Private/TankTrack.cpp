@@ -37,7 +37,7 @@ void UTankTrack::ApplySidewaysForce()
 {
 	
 	//Calculate the slipage speed
-	//Work out the required accelelration this frame to correct
+	//Work out the required acceleration this frame to correct
 	auto SlippageSpeed = FVector::DotProduct(GetRightVector(), GetComponentVelocity());
 	
 	auto DeltaTime = GetWorld()->GetDeltaSeconds();
@@ -55,12 +55,8 @@ void UTankTrack::ApplySidewaysForce()
 
 
 void UTankTrack::SetThrottle(float Throttle) 
-{
-	
-	
-	//TODO clamp actual throttle value so player can´t overdrive
+{		
 	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1, 1);
-	
 }
 
 void UTankTrack::DriveTrack()

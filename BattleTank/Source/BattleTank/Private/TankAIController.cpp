@@ -49,26 +49,27 @@ void ATankAIController::Tick(float DeltaTime)
 	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 	///this is the tank itself	
 	auto ControlledTank = GetPawn();
+	/*
+	Ensure removed from if condition
+	Ensure condition failed: PlayerTank && ControlledTank [File:H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Private\TankAIController.cpp] [Line: 53] 
+	*/
+	if (!(PlayerTank && ControlledTank)) { return;	}
+	
+	//Todo MOVE TOWARDS the player
+	MoveToActor(PlayerTank, AcceptanceRadius); 
 
-	if (!ensure(PlayerTank && ControlledTank))
+	//Aim towards the player( name of the method is different)
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	
+	if (!ensure(AimingComponent)) { return; }
+	AimingComponent->AimAt(PlayerTank->GetActorLocation());
+
+
+	if (AimingComponent->GetFiringState() == EFiringState::Locked) 
 	{
-		//Todo MOVE TOWARDS the player
-		MoveToActor(PlayerTank, AcceptanceRadius); 
-
-		//Aim towards the player( name of the method is different)
-		auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
-		if (!ensure(AimingComponent)) { return; }
-		AimingComponent->AimAt(PlayerTank->GetActorLocation());
-
-
-		if (AimingComponent->GetFiringState() == EFiringState::Locked) {
-			AimingComponent->Fire();
-		}
-
-
-
-
+		AimingComponent->Fire();
 	}
+	
 
 }
 
