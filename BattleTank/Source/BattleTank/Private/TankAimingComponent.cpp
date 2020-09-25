@@ -20,6 +20,11 @@ UTankAimingComponent::UTankAimingComponent()
 
 void UTankAimingComponent::BeginPlay()
 {
+	/* ERROR related on the absence of Super::BeginPlay();
+	Ensure condition failed: Component->HasBegunPlay() [File:D:\Build\++UE4\Sync\Engine\Source\Runtime\Engine\Private\Actor.cpp] [Line: 3372]
+	LogOutputDevice: Error: Failed to route BeginPlay (TankAimingComponent /Game/_Levels/UEDPIE_0_BattleGrounds.BattleGrounds:PersistentLevel.Mortar_BP_2.MortarAiming)*/
+	Super::BeginPlay();
+
 	//First fire is after initial reload
 	LastFireTime = FPlatformTime::Seconds();
 }
@@ -111,14 +116,14 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 }
 
 
-void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+void UTankAimingComponent::MoveBarrelTowards(FVector TargetAimDirection)
 {
 	if (!ensure(Turret) || !ensure(Barrel) ) { return; }
 
 	//UE_LOG(LogTemp, Warning, TEXT(" HERE "))
 	//work out difference between current ROTATION, and aim direction
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
-	auto AimAsRotator = AimDirection.Rotation();
+	auto AimAsRotator = TargetAimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
 	//elevated (-1)down (+1)up	

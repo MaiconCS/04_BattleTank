@@ -77,12 +77,12 @@ void AProjectile::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor,
 	);
 
 
-	/* How to use a delegate from the engine	
-	   first seek the function and types, in this case SetTimer
-	   2 change the parameters of the function	
+	/* How to use a delegate from the engine https://docs.unrealengine.com/en-US/Programming/UnrealArchitecture/Delegates/index.html	 
+	   1st seek the function and types, in this case SetTimer
+	   2nd change the parameters of the function	
 	*/
 
-	FTimerHandle Timer; // first parameter, 
+	FTimerHandle Timer; // first parameter in SetTimer
 
 	GetWorld()->GetTimerManager().SetTimer( 
 		Timer,                      // FTimerHandle & InOutHandle,

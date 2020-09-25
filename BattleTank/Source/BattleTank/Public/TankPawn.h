@@ -44,9 +44,7 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Health")
 	int32 CurrentlyHealth; // Initialized in BeginPlay
 
-	//float DamageAmount;
 	
-
 	virtual void BeginPlay() override;
 
 	

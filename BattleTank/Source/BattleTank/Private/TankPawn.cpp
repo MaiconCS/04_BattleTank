@@ -27,7 +27,7 @@ ATankPawn::ATankPawn()
 
 void ATankPawn::BeginPlay()
 {
-	Super::BeginPlay(); // Needed for BP Begin Play to run
+	Super::BeginPlay(); // Needed for BP_BeginPlay to run
 
 	//set the value at right time in execution, no rewrite the same 100 in StartingHealth;
 	CurrentlyHealth = StartingHealth;
