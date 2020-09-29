@@ -4,6 +4,7 @@
 
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\CoreMinimal.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework\Actor.h"
+#include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Components\SphereComponent.h"
 #include "C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\PhysicsEngine\PhysicsConstraintComponent.h"
 #include "SprungWheel.generated.h"
 
@@ -26,16 +27,18 @@ public:
 
 
 private:
-	//Components
-
+	void SetupConstraint();
+	
+	//Components	
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	USphereComponent* Wheel = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	USphereComponent* Axle = nullptr;
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UPhysicsConstraintComponent* MassWheelConstraint = nullptr;
-	
 	UPROPERTY(VisibleAnywhere, Category = "Components")
-	UStaticMeshComponent* Mass = nullptr;
-
-	UPROPERTY(VisibleAnywhere, Category = "Components")
-	UStaticMeshComponent* Wheel = nullptr;
-
+	UPhysicsConstraintComponent* AxleWheelConstraint = nullptr;
 	
+	/*if changed more than two time an class type in the component of these class, in engine
+	has high probality of doesnt show edit properts, simple solution is delete the blueprint and do it again*/
 };
