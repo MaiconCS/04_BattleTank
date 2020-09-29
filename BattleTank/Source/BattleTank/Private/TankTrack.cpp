@@ -2,13 +2,17 @@
 
 
 #include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\TankTrack.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\SprungWheel.h"
+#include "H:\repos\04_BattleTank\BattleTank\Source\BattleTank\Public\SpawnPoint.h"
+
+
 
 UTankTrack::UTankTrack()
 {
 	PrimaryComponentTick.bCanEverTick = false;
 	
 }
-
+/*No need, fixed suspesion in tank
 void UTankTrack::BeginPlay() 
 {
 	Super::BeginPlay();
@@ -16,23 +20,21 @@ void UTankTrack::BeginPlay()
 	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
 
 }
-
-
+*/
+/*No need, fixed suspesion in tank
 void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("OnHit"))
 
-	//Drive the tracks
-	DriveTrack();
+
 	
 	//Apply sideways force
 	ApplySidewaysForce();	
 	
 	CurrentThrottle = 0;
 
-}
-
-
+}*/
+/*No need, fixed suspesion in tank
 void UTankTrack::ApplySidewaysForce()
 {
 	
@@ -51,21 +53,48 @@ void UTankTrack::ApplySidewaysForce()
 
 	TankRoot->AddForce(CorrectionForce);
 
-}
+}*/
 
 
 void UTankTrack::SetThrottle(float Throttle) 
 {		
-	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1, 1);
+	float CurrentThrottle = FMath::Clamp<float>(Throttle, -1, 1);
+	//Drive the tracks
+	DriveTrack(CurrentThrottle);
 }
 
-void UTankTrack::DriveTrack()
-{
-	auto ForceApplied = GetForwardVector() * CurrentThrottle * TrackMaxDrivingForce;
 
-	auto ForceLocation = GetComponentLocation();
+TArray<class ASprungWheel*> UTankTrack::GetWheels() const
+{	
+	TArray<ASprungWheel*> ResultArray;
+	TArray<USceneComponent*> Children;
+	GetChildrenComponents(true, Children); //USE WITH TArray
+	for (USceneComponent * child : Children) 
+	{
+		auto SpawnPointChild = Cast<USpawnPoint>(child);
+		if (!SpawnPointChild) { continue; }
 
-	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
+		AActor* SpawnedChild = SpawnPointChild->GetSpawnedActor();
+		auto SprungWheel = Cast<ASprungWheel>(SpawnedChild);
+		if (!SprungWheel) {	continue; }
 
-	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
+		ResultArray.Add(SprungWheel);
+	}
+	return ResultArray;
+}
+
+void UTankTrack::DriveTrack(float CurrentThrottle)
+{	
+	auto ForceApplied = CurrentThrottle * TrackMaxDrivingForce;
+
+	auto Wheels = GetWheels();
+	auto ForcePerWheel = ForceApplied / Wheels.Num();
+
+	
+	for (ASprungWheel* Wheel : Wheels) 
+	{
+		Wheel->AddDrivingForce(ForcePerWheel);
+	}
+
+		
 }
