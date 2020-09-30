@@ -69,9 +69,9 @@ TArray<class ASprungWheel*> UTankTrack::GetWheels() const
 	TArray<ASprungWheel*> ResultArray;
 	TArray<USceneComponent*> Children;
 	GetChildrenComponents(true, Children); //USE WITH TArray
-	for (USceneComponent * child : Children) 
+	for (USceneComponent* Child : Children) 
 	{
-		auto SpawnPointChild = Cast<USpawnPoint>(child);
+		auto SpawnPointChild = Cast<USpawnPoint>(Child);
 		if (!SpawnPointChild) { continue; }
 
 		AActor* SpawnedChild = SpawnPointChild->GetSpawnedActor();

@@ -11,6 +11,10 @@ ASprungWheel::ASprungWheel()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	//Check Tick Group 
+	PrimaryActorTick.TickGroup = TG_PostPhysics;
+
+
 
 	MassWheelConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("MassWheelConstraint"));
 	SetRootComponent(MassWheelConstraint);
@@ -33,6 +37,10 @@ void ASprungWheel::BeginPlay()
 	
 	//UE_LOG(LogTemp, Warning, TEXT("null"));
 	
+	Wheel->SetNotifyRigidBodyCollision(true);//Always receive those OnHit
+
+	Wheel->OnComponentHit.AddDynamic(this, &ASprungWheel::OnHit);
+
 	SetupConstraint();
 }
 
@@ -48,22 +56,45 @@ void ASprungWheel::SetupConstraint()
 
 }
 
+
 // Called every frame
 void ASprungWheel::Tick(float DeltaTime)
 {
+	
 	Super::Tick(DeltaTime);
 
-}
+	
+	//UE_LOG(LogTemp, Warning, TEXT("Tick %f"), GetWorld()->GetTimeSeconds());
 
-void ASprungWheel::AddDrivingForce(float ForceMagnitude)
-{
-	//Get the direction to this force
-	Wheel->AddForce(Axle->GetForwardVector() * ForceMagnitude);
-
+	//Double Check Tick Group 
+	if (GetWorld()->TickGroup == TG_PostPhysics) 
+	{
+		TotalForceMagnitudeThisFrame = 0;
+	}
 	
 }
 
+void ASprungWheel::AddDrivingForce(float ForceMagnitude)
+{	
+	//Do proper addition within the frame, get the total force magnitude at the end.
+	//without tank wont be able to steer
 
+	TotalForceMagnitudeThisFrame += ForceMagnitude;
+		
+}
+
+void ASprungWheel::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult & Hit)
+{
+	//UE_LOG(LogTemp, Warning, TEXT("OnHit %f"), GetWorld()->GetTimeSeconds() );
+	ApplyForce();
+}
+
+void ASprungWheel::ApplyForce()
+{
+	//Get the direction to this force
+	Wheel->AddForce( Axle->GetForwardVector() * TotalForceMagnitudeThisFrame );
+
+}
 
 
 
